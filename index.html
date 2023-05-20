@@ -1,40 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>메타마스크 팝업 예제</title>
+    <title>NFT 민트 및 메타마스크 결제 예제</title>
     <script src="./lib/web3.min.js"></script>
     <script>
-      // 이 부분은 사용자의 메타마스크 계정을 확인하는 예제입니다.
-      // 실제로는 원하는 기능을 구현해야 합니다.
-      function checkMetaMaskAccount() {
-        if (typeof web3 !== "undefined") {
-          // web3 = new Web3(web3.currentProvider);
-          web3 = new Web3(
-            "https://avalanche-fuji.infura.io/v3/94dc467523cc4cdcb980c4a9ae3bba5e"
-          );
-          web3.eth.getAccounts(function (error, accounts) {
-            if (error) {
-              console.error(error);
-            } else if (accounts.length === 0) {
-              alert("메타마스크 계정을 찾을 수 없습니다.");
-            } else {
-              alert("메타마스크 계정: " + accounts[0]);
-            }
-          });
-        } else {
-          alert("메타마스크를 설치해주세요.");
-        }
-      }
-      function openMetaMaskPopup() {
+      // NFT 민트 및 메타마스크 결제 함수
+      async function mintNFT() {
         if (typeof window.ethereum !== "undefined") {
-          window.ethereum
-            .enable()
-            .then(function (accounts) {
-              alert("메타마스크 계정: " + accounts[0]);
-            })
-            .catch(function (error) {
-              console.error(error);
+          try {
+            // 사용자에게 DApp 접근 권한 요청
+            const accounts = await window.ethereum.request({
+              method: "eth_requestAccounts",
             });
+
+            // 메타마스크 계정 주소
+            const fromAddress = accounts[0];
+
+            // NFT 컨트랙트 정보
+            const contractAddress =
+              "0x790fF1c5023E703a104592983Ad35B0B39819261"; // 실제 컨트랙트 주소로 변경해야 합니다.
+
+            // Web3.js 인스턴스 생성
+            const web3 = new Web3(window.ethereum);
+
+            // NFT 컨트랙트 인스턴스 생성
+            const contract = new web3.eth.Contract(abi, contractAddress);
+
+            // NFT 민트 트랜잭션 전송
+            const result = await contract.methods.mintNFT().send({
+              from: fromAddress,
+              value: web3.utils.toWei("0.00001", "ether"), // NFT 가격으로 변경해야 합니다.
+            });
+
+            console.log("NFT 민트 완료:", result);
+          } catch (error) {
+            console.error("오류 발생:", error);
+          }
         } else {
           alert("메타마스크를 설치해주세요.");
         }
@@ -42,8 +43,7 @@
     </script>
   </head>
   <body>
-    <h1>메타마스크 팝업 예제 페이지</h1>
-    <button onclick="openMetaMaskPopup()">메타마스크 계정 확인</button>
-    <button onclick="checkMetaMaskAccount()">메타마스크 계정 확인</button>
+    <h1>NFT 민트 및 메타마스크 결제 예제 페이지</h1>
+    <button onclick="mintNFT()">NFT 민트 및 결제</button>
   </body>
 </html>
