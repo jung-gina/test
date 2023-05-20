@@ -23,6 +23,14 @@
             // Web3.js 인스턴스 생성
             const web3 = new Web3(window.ethereum);
 
+            const abi = {
+              inputs: [],
+              name: "mintTicket",
+              outputs: [],
+              stateMutability: "payable",
+              type: "function",
+            };
+
             // NFT 컨트랙트 인스턴스 생성
             const contract = new web3.eth.Contract(abi, contractAddress);
 
