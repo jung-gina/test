@@ -50,7 +50,7 @@
             const contract = new web3.eth.Contract(abi, contractAddress);
 
             // NFT 민트 트랜잭션 전송
-            const result = await contract.methods.mintNFT().send({
+            const result = await contract.methods.mintTicket().send({
               from: fromAddress,
               value: web3.utils.toWei("0.00001", "ether"), // NFT 가격으로 변경해야 합니다.
             });
