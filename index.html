@@ -24,7 +24,7 @@
             const web3 = new Web3(window.ethereum);
 
             const nonce = await web3.eth.getTransactionCount(
-              userAddress,
+              fromAddress,
               "latest"
             );
             const data = web3.eth.abi.encodeFunctionCall(
