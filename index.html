@@ -9,7 +9,9 @@
       function checkMetaMaskAccount() {
         if (typeof web3 !== "undefined") {
           // web3 = new Web3(web3.currentProvider);
-          web3 = new Web3('https://avalanche-fuji.infura.io/v3/94dc467523cc4cdcb980c4a9ae3bba5e');
+          web3 = new Web3(
+            "https://avalanche-fuji.infura.io/v3/94dc467523cc4cdcb980c4a9ae3bba5e"
+          );
           web3.eth.getAccounts(function (error, accounts) {
             if (error) {
               console.error(error);
@@ -41,6 +43,6 @@
   </head>
   <body>
     <h1>메타마스크 팝업 예제 페이지</h1>
-    <button onclick="checkMetaMaskAccount()">메타마스크 계정 확인</button>
+    <button onclick="openMetaMaskPopup()">메타마스크 계정 확인</button>
   </body>
 </html>
