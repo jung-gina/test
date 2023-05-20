@@ -23,6 +23,21 @@
             // Web3.js 인스턴스 생성
             const web3 = new Web3(window.ethereum);
 
+            const nonce = await web3.eth.getTransactionCount(
+              userAddress,
+              "latest"
+            );
+            const data = web3.eth.abi.encodeFunctionCall(
+              {
+                inputs: [],
+                name: "mintTicket",
+                outputs: [],
+                stateMutability: "payable",
+                type: "function",
+              },
+              []
+            );
+
             const abi = {
               inputs: [],
               name: "mintTicket",
