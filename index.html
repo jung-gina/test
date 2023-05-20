@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>메타마스크 팝업 예제</title>
+    <script src="./lib/web3.min.js"></script>
+    <script>
+      // 이 부분은 사용자의 메타마스크 계정을 확인하는 예제입니다.
+      // 실제로는 원하는 기능을 구현해야 합니다.
+      function checkMetaMaskAccount() {
+        if (typeof web3 !== "undefined") {
+          web3 = new Web3(web3.currentProvider);
+          web3.eth.getAccounts(function (error, accounts) {
+            if (error) {
+              console.error(error);
+            } else if (accounts.length === 0) {
+              alert("메타마스크 계정을 찾을 수 없습니다.");
+            } else {
+              alert("메타마스크 계정: " + accounts[0]);
+            }
+          });
+        } else {
+          alert("메타마스크를 설치해주세요.");
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>메타마스크 팝업 예제 페이지</h1>
+    <button onclick="checkMetaMaskAccount()">메타마스크 계정 확인</button>
+  </body>
+</html>
