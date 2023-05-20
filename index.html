@@ -22,10 +22,24 @@
           alert("메타마스크를 설치해주세요.");
         }
       }
+      function openMetaMaskPopup() {
+        if (typeof window.ethereum !== "undefined") {
+          window.ethereum
+            .enable()
+            .then(function (accounts) {
+              alert("메타마스크 계정: " + accounts[0]);
+            })
+            .catch(function (error) {
+              console.error(error);
+            });
+        } else {
+          alert("메타마스크를 설치해주세요.");
+        }
+      }
     </script>
   </head>
   <body>
     <h1>메타마스크 팝업 예제 페이지</h1>
-    <button onclick="checkMetaMaskAccount()">메타마스크 계정 확인</button>
+    <button onclick="openMetaMaskPopup()">메타마스크 계정 확인</button>
   </body>
 </html>
